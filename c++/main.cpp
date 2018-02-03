@@ -53,7 +53,7 @@ int main(int argc, char **argv)
                 radius, rigid_disk::position{uni_x(rng), uni_y(rng)}
             };
             const auto overlap_with = [&](const rigid_disk::disk& dsk){
-                return rigid_disk::overlaps(new_disk, dsk);
+                return rigid_disk::overlaps(new_disk, dsk, sys.bc);
             };
             if(sys.disks.cend() == std::find_if(
                     sys.disks.cbegin(), sys.disks.cend(), overlap_with))
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
             {
                 if(j == idx){continue;}
 
-                if(rigid_disk::overlaps(target, sys.disks[j]))
+                if(rigid_disk::overlaps(target, sys.disks[j], sys.bc))
                 {
                     collides = true;
                     break;
