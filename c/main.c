@@ -90,7 +90,7 @@ int main(int argc, char **argv)
             bool collides=false;
             for(size_t i=0; i<n; ++i)
             {
-                if(overlaps(&new_disk, &(sys.disks[i])))
+                if(overlaps(&new_disk, &(sys.disks[i]), &sys.bc))
                 {
                     collides = true;
                     break;
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
             {
                 if(j == idx){continue;}
 
-                if(overlaps(&target, &sys.disks[j]))
+                if(overlaps(&target, &sys.disks[j], &sys.bc))
                 {
                     collides = true;
                     break;

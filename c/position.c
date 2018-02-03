@@ -29,14 +29,8 @@ void vec_div(position* const lhs, double const rhs)
     return;
 }
 
-double vec_distance_sq(position const* const lhs, position const* const rhs)
+double vec_length_sq(position const* const vec)
 {
-    position dr = *lhs;
-    vec_sub(&dr, rhs);
-    return dr.x * dr.x + dr.y * dr.y;
+    return vec->x * vec->x + vec->y * vec->y;
 }
 
-double vec_distance(position const* const lhs, position const* const rhs)
-{
-    return sqrt(vec_distance_sq(lhs, rhs));
-}
