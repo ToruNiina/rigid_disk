@@ -1,5 +1,7 @@
 # Rigid disk MCMC
 
+for study group.
+
 2次元周期境界剛体円盤系のMCMCシミュレーション。
 ゼミの一環。
 
