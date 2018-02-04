@@ -1,3 +1,4 @@
+# "immutable struct" causes an error: syntax: invalid type name "struct"
 immutable Boundary
     lower      :: Array{Float64,1}
     upper      :: Array{Float64,1}
