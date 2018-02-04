@@ -172,10 +172,9 @@ contains
         type(disk) :: disks(:)
         integer, intent(in) :: n
 
-        write(*,*) num_disks
-        write(*,*) ""
+        write(*,'(I0,/)') num_disks
         do i=1, num_disks
-            write(*,*) "H", disks(i)%pos(1), disks(i)%pos(2), 0.0
+            write(*,'("H     ", f8.3, f8.3, " 0.0")') disks(i)%pos(1), disks(i)%pos(2)
         end do
     end subroutine print_disks
 
