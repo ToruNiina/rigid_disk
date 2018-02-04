@@ -24,3 +24,4 @@ for study group.
 * Rust (1.19)
 * fortran (fortran95)
 * julia (0.6.0)
+* python3 (3.5.2)
