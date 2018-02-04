@@ -20,12 +20,16 @@ function restrict_position(vec, bc)
 end
 
 function restrict_direction(vec, bc)
-    vec[1] += if (vec[1] < -bc.half_width[1])  bc.width[1]
-          elseif (bc.half_width[1]  < vec[1]) -bc.width[1]
-          else 0.0 end;
-    vec[2] += if (vec[2] < -bc.half_width[2])  bc.width[2]
-          elseif (bc.half_width[2]  < vec[2]) -bc.width[2]
-          else 0.0 end;
+    if (vec[1] < -bc.half_width[1]) 
+        vec[1] += bc.width[1]
+    elseif (bc.half_width[1] < vec[1])
+        vec[1] -= bc.width[1]
+    end
+    if (vec[2] < -bc.half_width[2])
+        vec[2] += bc.width[2]
+    elseif (bc.half_width[2] < vec[2])
+        vec[2] -= bc.width[2]
+    end
     return vec
 end
 
@@ -35,7 +39,7 @@ mutable struct Disk
 end
 
 function overlaps(lhs, rhs, bc)
-    dr = lhs.p - rhs.p
+    dr = restrict_direction(lhs.p - rhs.p, bc)
     d2 = dot(dr, dr)
     return d2 < (lhs.r + rhs.r) ^ 2
 end
@@ -86,7 +90,7 @@ for t=1:10
     for i in indices
         target = disks[i]
         dr     = [rand(mt), rand(mt)]
-        target.p += dr
+        target.p = restrict_position(target.p + dr, bc)
 
         collides = false
         for j=1:N
