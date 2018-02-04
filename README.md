@@ -23,3 +23,4 @@ for study group.
 * C++ (C++11)
 * Rust (1.19)
 * fortran (fortran95)
+* julia (0.6.0)
