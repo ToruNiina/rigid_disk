@@ -10,12 +10,16 @@ immutable Boundary
 end
 
 function restrict_position(vec, bc)
-    vec[1] += if (vec[1] < bc.lower[1])  bc.width[1]
-          elseif (bc.lower[1] < vec[1]) -bc.width[1]
-          else 0.0 end;
-    vec[2] += if (vec[2] < bc.lower[2])  bc.width[2]
-          elseif (bc.lower[2] < vec[2]) -bc.width[2]
-          else 0.0 end;
+    if (vec[1] < bc.lower[1])
+        vec[1] += bc.width[1]
+    elseif (bc.upper[1] < vec[1])
+        vec[1] -= bc.width[1]
+    end
+    if (vec[2] < bc.lower[2])
+        vec[2] += bc.width[2]
+    elseif (bc.upper[2] < vec[2])
+        vec[2] -= bc.width[2]
+    end
     return vec
 end
 
