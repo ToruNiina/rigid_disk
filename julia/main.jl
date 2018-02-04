@@ -25,7 +25,7 @@ function restrict_position(vec, bc)
 end
 
 function restrict_direction(vec, bc)
-    if (vec[1] < -bc.half_width[1]) 
+    if (vec[1] < -bc.half_width[1])
         vec[1] += bc.width[1]
     elseif (bc.half_width[1] < vec[1])
         vec[1] -= bc.width[1]
@@ -45,7 +45,7 @@ end
 
 function overlaps(lhs, rhs, bc)
     dr = restrict_direction(lhs.p - rhs.p, bc)
-    d2 = dot(dr, dr)
+    d2 = dr[1]^2 + dr[2]^2
     return d2 < (lhs.r + rhs.r) ^ 2
 end
 
@@ -93,14 +93,14 @@ for t=1:10
     print(disks)
     shuffle(mt, indices)
     for i in indices
-        target = disks[i]
-        dr     = [rand(mt), rand(mt)]
+        target = Disk(disks[i].r, disks[i].p)
+        dr     = [(rand(mt) * 2.0 - 1.0) * δ, (rand(mt) * 2.0 - 1.0) * δ]
         target.p = restrict_position(target.p + dr, bc)
 
         collides = false
         for j=1:N
             if i == j
-                break
+                continue
             end
             if overlaps(target, disks[j], bc)
                 collides = true
